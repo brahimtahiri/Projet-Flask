@@ -7,22 +7,55 @@
     background-color: black;
   }
 
-  #Madiv1 {
-    color: white;
-    background-color: green;
-    position: absolute;
-    left: 25px;
-    top: 25px;
+  #div-principale {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border: 2px solid white;
+  }
+
+  .box {
     width: 100px;
     height: 100px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+  }
+
+  #div-1 {
+    background-color: green;
+    top: 0;
+    left: 0;
+  }
+
+  #div-2 {
+    background-color: orange;
+    top: 0;
+    right: 0;
+  }
+
+  #div-3 {
+    background-color: red;
+    bottom: 0;
+    left: 0;
+  }
+
+  #div-4 {
+    background-color: blue;
+    bottom: 0;
+    right: 0;
   }
 </style>
 {% endblock %}
 
 <!-- Contenu de la balise '<body>' -->
 {% block content %}
-<div id="Madiv1">En haut à gauche</div>
-<div>En haut à droite</div>
-<div>En bas à droite</div>
-<div>En bas à gauche</div>
+<div id="div-principale">
+  <div id="div-1" class="box">En haut à gauche</div>
+  <div id="div-2" class="box">En haut à droite</div>
+  <div id="div-3" class="box">En bas à droite</div>
+  <div id="div-4" class="box">En bas à gauche</div>
+</div>
 {% endblock %}
