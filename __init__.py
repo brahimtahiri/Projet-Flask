@@ -34,5 +34,9 @@ def maison():
 def vallet():
     return render_template('vallet.html')
 
+@app.route('/carre')
+def carre():
+    return render_template('c')
+
 if __name__ == '__main__':
     app.run(debug=True)

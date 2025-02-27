@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+<!-- Contenu de la balise '<head>' -->
+{% block head %}
+<style>
+  html {
+    background-color: black;
+  }
+
+  #Madiv1 {
+    color: white;
+    background-color: green;
+    position: absolute;
+    left: 25px;
+    top: 25px;
+    width: 100px;
+    height: 100px;
+  }
+</style>
+{% endblock %}
+
+<!-- Contenu de la balise '<body>' -->
+{% block content %}
+<div id="Madiv1">En haut à gauche</div>
+<div>En haut à droite</div>
+<div>En bas à droite</div>
+<div>En bas à gauche</div>
+{% endblock %}
