@@ -38,5 +38,9 @@ def vallet():
 def carre():
     return render_template('carre.html')
 
+@app.route('/etoiles')
+def carre():
+    return render_template('etoiles.html')
+
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+<!-- Contenu de la balise '<body>' -->
+{% block content %}
+<div>
+  <label for="input_int">Saisir un chiffre :</label>
+  <input type="number" id="input_int" />
+  <button type="button" onclick="afficher()">Afficher</button>
+  <div id="result"></div>
+</div>
+{% endblock %}
+
+<!-- Contenu de la balise '<script>' -->
+{% block script %}
+<script>
+  function afficher() {
+    var input_int = document.getElementById("input_int").value;
+    var result = "";
+
+    for (j = 0; j < input_int; j++) {
+      for (i = 0; i < input_int; i++) {
+        result += "*";
+      }
+      result += "</br>";
+    }
+
+    document.getElementById("result").innerHTML = result;
+  }
+</script>
+{% endblock %}
