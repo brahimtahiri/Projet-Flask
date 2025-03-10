@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+<!-- Contenu de la balise '<body>' -->
+{% block content %}
+<div>
+  <h3>Image(s) à afficher :</h3>
+  <input type="checkbox" id="image_1" />
+  <label for="image_1">Image 1</label>
+  <br />
+  <input type="checkbox" id="image_2" />
+  <label for="image_2">Image 2</label>
+  <br />
+  <input type="checkbox" id="image_3" />
+  <label for="image_3">Image 3</label>
+</div>
+<br />
+<div id="images"></div>
+{% endblock %}
+
+<!-- Contenu de la balise '<script>' -->
+{% block script %}
+<script>
+  cb_image_1 = document.getElementById("image_1");
+  cb_image_2 = document.getElementById("image_2");
+  cb_image_3 = document.getElementById("image_3");
+
+  cb_image_1.addEventListener("change", update_images);
+  cb_image_2.addEventListener("change", update_images);
+  cb_image_3.addEventListener("change", update_images);
+
+  function update_images() {
+    result = "";
+
+    if (cb_image_1.checked) {
+      result += `<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1j3Jz3URk2JarKIxmojkTNwHW7foMSezuWg&s" alt="Logo de Microsoft" width="225">`;
+    }
+
+    if (cb_image_2.checked) {
+      result += `<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/800px-Google_%22G%22_logo.svg.png" alt="Logo de Google" width="225">`;
+    }
+
+    if (cb_image_3.checked) {
+      result += `<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2xQcwKitRgXfqdi34DYlocPSEXD2G2zZipg&s" alt="Logo de Amazon Web Services" width="225">`;
+    }
+
+    document.getElementById("images").innerHTML = result;
+  }
+</script>
+{% endblock %}
