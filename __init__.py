@@ -39,7 +39,7 @@ def carre():
     return render_template('carre.html')
 
 @app.route('/etoiles')
-def carre():
+def etoiles():
     return render_template('etoiles.html')
 
 if __name__ == '__main__':

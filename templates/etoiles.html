@@ -6,7 +6,9 @@
   <label for="input_int">Saisir un chiffre :</label>
   <input type="number" id="input_int" />
   <button type="button" onclick="afficher()">Afficher</button>
-  <div id="result"></div>
+  <div id="exercice_1"></div>
+  <hr />
+  <div id="exercice_2"></div>
 </div>
 {% endblock %}
 
@@ -14,6 +16,11 @@
 {% block script %}
 <script>
   function afficher() {
+    exercice_1();
+    exercice_2();
+  }
+
+  function exercice_1() {
     var input_int = document.getElementById("input_int").value;
     var result = "";
 
@@ -24,7 +31,21 @@
       result += "</br>";
     }
 
-    document.getElementById("result").innerHTML = result;
+    document.getElementById("exercice_1").innerHTML = result;
+  }
+
+  function exercice_2() {
+    var input_int = document.getElementById("input_int").value;
+    var result = "";
+
+    for (j = 0; j < input_int; j++) {
+      for (i = 0; i <= j; i++) {
+        result += "*";
+      }
+      result += "</br>";
+    }
+
+    document.getElementById("exercice_2").innerHTML = result;
   }
 </script>
 {% endblock %}
