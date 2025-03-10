@@ -13,6 +13,8 @@
   <div id="exercice_3"></div>
   <hr />
   <div id="exercice_4"></div>
+  <hr />
+  <div id="exercice_5"></div>
 </div>
 {% endblock %}
 
@@ -24,6 +26,7 @@
     exercice_2();
     exercice_3();
     exercice_4();
+    exercice_5();
   }
 
   function exercice_1() {
@@ -85,6 +88,33 @@
     }
 
     document.getElementById("exercice_4").innerHTML = result;
+  }
+
+  function exercice_5() {
+    var input_int = document.getElementById("input_int").value;
+    var result = "";
+
+    for (var i = 1; i <= input_int; i++) {
+      for (var j = 1; j <= input_int - i; j++) {
+        result += "&ensp;";
+      }
+      for (var k = 1; k <= 2 * i - 1; k++) {
+        result += "*";
+      }
+      result += "<br />";
+    }
+
+    for (var i = input_int - 1; i > 0; i--) {
+      for (var j = 1; j <= input_int - i; j++) {
+        result += "&ensp;";
+      }
+      for (var k = 1; k <= 2 * i - 1; k++) {
+        result += "*";
+      }
+      result += "<br />";
+    }
+
+    document.getElementById("exercice_5").innerHTML = result;
   }
 </script>
 {% endblock %}
