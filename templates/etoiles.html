@@ -11,6 +11,8 @@
   <div id="exercice_2"></div>
   <hr />
   <div id="exercice_3"></div>
+  <hr />
+  <div id="exercice_4"></div>
 </div>
 {% endblock %}
 
@@ -21,6 +23,7 @@
     exercice_1();
     exercice_2();
     exercice_3();
+    exercice_4();
   }
 
   function exercice_1() {
@@ -31,7 +34,7 @@
       for (i = 0; i < input_int; i++) {
         result += "*";
       }
-      result += "</br>";
+      result += "<br />";
     }
 
     document.getElementById("exercice_1").innerHTML = result;
@@ -45,7 +48,7 @@
       for (i = 0; i <= j; i++) {
         result += "*";
       }
-      result += "</br>";
+      result += "<br />";
     }
 
     document.getElementById("exercice_2").innerHTML = result;
@@ -59,10 +62,29 @@
       for (i = 0; i < j; i++) {
         result += "*";
       }
-      result += "</br>";
+      result += "<br />";
     }
 
     document.getElementById("exercice_3").innerHTML = result;
+  }
+
+  function exercice_4() {
+    var input_int = document.getElementById("input_int").value;
+    var result = "";
+
+    for (i = input_int; i > 0; i--) {
+      for (j = 0; j < i - 1; j++) {
+        result += "&ensp;";
+      }
+
+      for (k = 0; k < input_int - j; k++) {
+        result += "*";
+      }
+
+      result += "<br />";
+    }
+
+    document.getElementById("exercice_4").innerHTML = result;
   }
 </script>
 {% endblock %}
