@@ -39,6 +39,10 @@ textarea {
   padding: 1%;
 }
 
+.center {
+  text-align: center;
+}
+
 .form-field {
   display: grid;
   grid-template-columns: 1fr;
