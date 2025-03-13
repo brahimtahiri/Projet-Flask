@@ -30,7 +30,7 @@
 <!-- Contenu de la balise '<script>' -->
 {% block script %}
 <script>
-  var selected_barrel = 0;
+  var selected_barrel;
 
   B1 = document.getElementById("B1");
   B2 = document.getElementById("B2");
@@ -39,17 +39,20 @@
   B5 = document.getElementById("B5");
   B6 = document.getElementById("B6");
 
-  B1.addEventListener("click", () => select_barrel(1));
-  B2.addEventListener("click", () => select_barrel(2));
-  B3.addEventListener("click", () => select_barrel(3));
-  B4.addEventListener("click", () => select_barrel(4));
-  B5.addEventListener("click", () => select_barrel(5));
-  B6.addEventListener("click", () => select_barrel(6));
+  B1.addEventListener("click", (event) => select_barrel(event.target));
+  B2.addEventListener("click", (event) => select_barrel(event.target));
+  B3.addEventListener("click", (event) => select_barrel(event.target));
+  B4.addEventListener("click", (event) => select_barrel(event.target));
+  B5.addEventListener("click", (event) => select_barrel(event.target));
+  B6.addEventListener("click", (event) => select_barrel(event.target));
 
-  function select_barrel(id) {
-    selected_barrel = id;
+  function select_barrel(barrel) {
+    if (selected_barrel != undefined) selected_barrel.setAttribute("fill", "gray");
 
-    document.getElementById("selected_barrel").innerHTML = `Vous avez sélectionné le barillet n°${selected_barrel}`;
+    selected_barrel = barrel;
+    barrel.setAttribute("fill", "red");
+
+    document.getElementById("selected_barrel").innerHTML = `Vous avez sélectionné le barillet n°${selected_barrel.id[1]}`;
   }
 
   function actionner() {}
