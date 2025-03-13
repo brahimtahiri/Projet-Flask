@@ -1,89 +1,134 @@
 {% extends 'base.html' %}
 
+<!-- Contenu de la balise '<style>' -->
+{% block style %}
 <style>
-  .center {
-    text-align: center;
+  div {
+    margin-bottom: 1%;
+  }
+
+  button {
+    padding-left: 1%;
+    padding-right: 1%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    font-weight: bold;
   }
 </style>
+{% endblock %}
 
 <!-- Contenu de la balise '<body>' -->
 {% block content %}
 <div class="center">
   <h1>Roulette Russe</h1>
-  <svg width="200" height="200" style="border: 2px solid; border-radius: 10%">
-    <circle cx="100" cy="100" r="95" stroke="black" stroke-width="3" fill="none" />
-    <circle id="B1" cx="100" cy="40" r="25" stroke="black" stroke-width="3" fill="gray" />
-    <circle id="B2" cx="150" cy="70" r="25" stroke="black" stroke-width="3" fill="gray" />
-    <circle id="B3" cx="150" cy="130" r="25" stroke="black" stroke-width="3" fill="gray" />
-    <circle id="B4" cx="100" cy="160" r="25" stroke="black" stroke-width="3" fill="gray" />
-    <circle id="B5" cx="50" cy="130" r="25" stroke="black" stroke-width="3" fill="gray" />
-    <circle id="B6" cx="50" cy="70" r="25" stroke="black" stroke-width="3" fill="gray" />
-    <circle cx="100" cy="100" r="10" stroke="black" stroke-width="3" fill="black" />
-  </svg>
-  <br />
-  <span id="message">Vous devez choisir un barillet.</span>
-  <br />
-  <button type="button" onclick="actionner()">Actionner la détente</button>
-</div>
-
-<div>
-  <h3>Comment fonctionne le jeu ?</h3>
-  <ol>
-    <li>Sélectionner un barillet</li>
-    <li>Cliquer sur le bouton "Actionner la détente"</li>
-    <li>Si vous avez perdu, le jeu se réinitialisera, sinon vous pouvez presser la détente jusqu'à ce que vous perdiez</li>
-  </ol>
+  <div>
+    <span id="earnings"></span>
+  </div>
+  <div>
+    <svg width="200" height="200" style="border: 2px solid; border-radius: 10%">
+      <circle cx="100" cy="100" r="10" stroke="black" stroke-width="3" fill="black" />
+      <circle cx="100" cy="100" r="95" stroke="black" stroke-width="3" fill="none" />
+      <circle id="C1" cx="100" cy="40" r="25" stroke="black" stroke-width="3" fill="gray" />
+      <circle id="C2" cx="150" cy="70" r="25" stroke="black" stroke-width="3" fill="gray" />
+      <circle id="C3" cx="150" cy="130" r="25" stroke="black" stroke-width="3" fill="gray" />
+      <circle id="C4" cx="100" cy="160" r="25" stroke="black" stroke-width="3" fill="gray" />
+      <circle id="C5" cx="50" cy="130" r="25" stroke="black" stroke-width="3" fill="gray" />
+      <circle id="C6" cx="50" cy="70" r="25" stroke="black" stroke-width="3" fill="gray" />
+    </svg>
+  </div>
+  <button type="button" id="button_play" onclick="play()" disabled>Jouer</button>
 </div>
 {% endblock %}
 
 <!-- Contenu de la balise '<script>' -->
 {% block script %}
 <script>
-  var selected_barrel;
+  var started = false;
+  var earnings = 0;
 
-  B1 = document.getElementById("B1");
-  B2 = document.getElementById("B2");
-  B3 = document.getElementById("B3");
-  B4 = document.getElementById("B4");
-  B5 = document.getElementById("B5");
-  B6 = document.getElementById("B6");
+  var selected_cylinders = [];
 
-  B1.addEventListener("click", (event) => select_barrel(event.target));
-  B2.addEventListener("click", (event) => select_barrel(event.target));
-  B3.addEventListener("click", (event) => select_barrel(event.target));
-  B4.addEventListener("click", (event) => select_barrel(event.target));
-  B5.addEventListener("click", (event) => select_barrel(event.target));
-  B6.addEventListener("click", (event) => select_barrel(event.target));
+  var _earnings = document.getElementById("earnings");
 
-  message = document.getElementById("message");
+  var C1 = document.getElementById("C1");
+  var C2 = document.getElementById("C2");
+  var C3 = document.getElementById("C3");
+  var C4 = document.getElementById("C4");
+  var C5 = document.getElementById("C5");
+  var C6 = document.getElementById("C6");
 
-  function select_barrel(barrel) {
-    if (selected_barrel != undefined) selected_barrel.setAttribute("fill", "gray");
+  var button_play = document.getElementById("button_play");
 
-    selected_barrel = barrel;
-    barrel.setAttribute("fill", "red");
+  C1.addEventListener("click", (event) => select_cylinder(event.target));
+  C2.addEventListener("click", (event) => select_cylinder(event.target));
+  C3.addEventListener("click", (event) => select_cylinder(event.target));
+  C4.addEventListener("click", (event) => select_cylinder(event.target));
+  C5.addEventListener("click", (event) => select_cylinder(event.target));
+  C6.addEventListener("click", (event) => select_cylinder(event.target));
 
-    message.innerHTML = `Vous avez sélectionné le barillet n°${selected_barrel.id[1]}`;
+  function select_cylinder(cylinder) {
+    if (selected_cylinders.length >= 3) return;
+
+    if (button_play.disabled) button_play.disabled = false;
+
+    selected_cylinders.push(cylinder.id);
+    cylinder.setAttribute("fill", "red");
   }
 
-  function actionner() {
-    if (selected_barrel == undefined) {
-      alert("Vous devez choisir un barillet !");
+  function play() {
+    started = true;
+
+    random_number = Math.floor(Math.random() * (7 - 1) + 1);
+
+    eval("C" + random_number).setAttribute("fill", "blue");
+
+    if (selected_cylinders.includes("C" + random_number)) {
+      alert("Vous avez perdu ! Même vos gains...");
+      reset();
       return;
     }
 
-    if (selected_barrel.id[1] == Math.floor(Math.random() * (7 - 1) + 1)) {
-      alert("Vous avez perdu !");
-      reset();
-    } else {
-      alert("Vous avez gagné !");
+    alert("Vous avez gagné !");
+
+    button_play.innerHTML = "Rejouer";
+
+    switch (selected_cylinders.length) {
+      case 1:
+        earnings += 10_000;
+        break;
+      case 2:
+        earnings += 100_000;
+        break;
+      case 3:
+        earnings += 1_000_000;
+        break;
+
+      default:
+        break;
     }
+
+    _earnings.innerHTML = `Vos gains : ${earnings}€`;
   }
 
   function reset() {
-    selected_barrel.setAttribute("fill", "gray");
-    selected_barrel = undefined;
-    message.innerHTML = "Vous devez choisir un barillet.";
+    started = false;
+    earnings = 0;
+
+    selected_cylinders = [];
+
+    _earnings.innerHTML = "Vos gains : 0€";
+
+    button_play.innerHTML = "Jouer";
+    button_play.disabled = true;
+
+    C1.setAttribute("fill", "gray");
+    C2.setAttribute("fill", "gray");
+    C3.setAttribute("fill", "gray");
+    C4.setAttribute("fill", "gray");
+    C5.setAttribute("fill", "gray");
+    C6.setAttribute("fill", "gray");
   }
+
+  document.addEventListener("load", reset());
 </script>
 {% endblock %}
