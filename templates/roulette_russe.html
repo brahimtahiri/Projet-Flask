@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+<style>
+  .center {
+    text-align: center;
+  }
+</style>
+
+<!-- Contenu de la balise '<body>' -->
+{% block content %}
+<div class="center">
+  <h1>Roulette Russe</h1>
+  <svg width="200" height="200" style="border: 2px solid; border-radius: 10%">
+    <circle cx="100" cy="100" r="95" stroke="black" stroke-width="3" fill="none" />
+    <circle id="B1" cx="100" cy="40" r="25" stroke="black" stroke-width="3" fill="gray" />
+    <circle id="B2" cx="150" cy="70" r="25" stroke="black" stroke-width="3" fill="gray" />
+    <circle id="B3" cx="150" cy="130" r="25" stroke="black" stroke-width="3" fill="gray" />
+    <circle id="B4" cx="100" cy="160" r="25" stroke="black" stroke-width="3" fill="gray" />
+    <circle id="B5" cx="50" cy="130" r="25" stroke="black" stroke-width="3" fill="gray" />
+    <circle id="B6" cx="50" cy="70" r="25" stroke="black" stroke-width="3" fill="gray" />
+    <circle cx="100" cy="100" r="10" stroke="black" stroke-width="3" fill="black" />
+  </svg>
+  <br />
+  <span id="selected_barrel">Vous devez choisir un barillet.</span>
+  <br />
+  <button type="button" onclick="actionner()">Actionner la détente.</button>
+</div>
+{% endblock %}
+
+<!-- Contenu de la balise '<script>' -->
+{% block script %}
+<script>
+  var selected_barrel = 0;
+
+  B1 = document.getElementById("B1");
+  B2 = document.getElementById("B2");
+  B3 = document.getElementById("B3");
+  B4 = document.getElementById("B4");
+  B5 = document.getElementById("B5");
+  B6 = document.getElementById("B6");
+
+  B1.addEventListener("click", () => select_barrel(1));
+  B2.addEventListener("click", () => select_barrel(2));
+  B3.addEventListener("click", () => select_barrel(3));
+  B4.addEventListener("click", () => select_barrel(4));
+  B5.addEventListener("click", () => select_barrel(5));
+  B6.addEventListener("click", () => select_barrel(6));
+
+  function select_barrel(id) {
+    selected_barrel = id;
+
+    document.getElementById("selected_barrel").innerHTML = `Vous avez sélectionné le barillet n°${selected_barrel}`;
+  }
+
+  function actionner() {}
+</script>
+{% endblock %}

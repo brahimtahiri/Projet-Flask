@@ -15,7 +15,7 @@
   <br />
   <span id="random_number">Vous devez lancer le dé</span>
   <br />
-  <button onclick="roll_the_die()">Lancer le dé</button>
+  <button type="button" onclick="roll_the_die()">Lancer le dé</button>
 </div>
 {% endblock %}
 
@@ -30,14 +30,14 @@
   C5 = document.getElementById("C5");
   C6 = document.getElementById("C6");
 
-  random_number = document.getElementById("random_number");
+  var random_number = document.getElementById("random_number");
 
   document.addEventListener("load", hide_circles());
 
   function roll_the_die() {
     hide_circles();
 
-    number = Math.floor(Math.random() * (7 - 1) + 1);
+    var number = Math.floor(Math.random() * (7 - 1) + 1);
     random_number.innerHTML = `Chiffre trouvé : ${number}`;
 
     switch (number) {
