@@ -30,17 +30,15 @@
   C5 = document.getElementById("C5");
   C6 = document.getElementById("C6");
 
-  var random_number = document.getElementById("random_number");
-
   document.addEventListener("load", hide_circles());
 
   function roll_the_die() {
     hide_circles();
 
-    var number = Math.floor(Math.random() * (7 - 1) + 1);
-    random_number.innerHTML = `Chiffre trouvé : ${number}`;
+    var random_number = Math.floor(Math.random() * (7 - 1) + 1);
+    document.getElementById("random_number").innerHTML = `Chiffre trouvé : ${random_number}`;
 
-    switch (number) {
+    switch (random_number) {
       case 1:
         C0.style.display = "block";
         break;
