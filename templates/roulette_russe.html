@@ -21,7 +21,7 @@
     <circle cx="100" cy="100" r="10" stroke="black" stroke-width="3" fill="black" />
   </svg>
   <br />
-  <span id="selected_barrel">Vous devez choisir un barillet.</span>
+  <span id="message_selected_barrel">Vous devez choisir un barillet.</span>
   <br />
   <button type="button" onclick="actionner()">Actionner la détente.</button>
 </div>
@@ -46,15 +46,25 @@
   B5.addEventListener("click", (event) => select_barrel(event.target));
   B6.addEventListener("click", (event) => select_barrel(event.target));
 
+  message_selected_barrel = document.getElementById("message_selected_barrel");
+
   function select_barrel(barrel) {
     if (selected_barrel != undefined) selected_barrel.setAttribute("fill", "gray");
 
     selected_barrel = barrel;
     barrel.setAttribute("fill", "red");
 
-    document.getElementById("selected_barrel").innerHTML = `Vous avez sélectionné le barillet n°${selected_barrel.id[1]}`;
+    message_selected_barrel.innerHTML = `Vous avez sélectionné le barillet n°${selected_barrel.id[1]}`;
   }
 
-  function actionner() {}
+  function actionner() {
+    if (selected_barrel == undefined) {
+      alert("Vous devez choisir un barillet !");
+      return;
+    }
+
+    var number = Math.floor(Math.random() * (7 - 1) + 1);
+    alert(`Le chiffre aléatoire est ${number}`);
+  }
 </script>
 {% endblock %}
