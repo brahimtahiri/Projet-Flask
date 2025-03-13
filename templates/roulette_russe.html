@@ -71,8 +71,10 @@
 
     if (button_play.disabled) button_play.disabled = false;
 
-    selected_cylinders.push(cylinder.id);
-    cylinder.setAttribute("fill", "red");
+    if (!started) {
+      selected_cylinders.push(cylinder.id);
+      cylinder.setAttribute("fill", "red");
+    }
   }
 
   function play() {
