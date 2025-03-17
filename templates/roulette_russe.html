@@ -71,7 +71,7 @@
 
     if (button_play.disabled) button_play.disabled = false;
 
-    if (!started) {
+    if (!started && !selected_cylinders.includes(cylinder.id)) {
       selected_cylinders.push(cylinder.id);
       cylinder.setAttribute("fill", "red");
     }
